@@ -4,4 +4,37 @@ services:
     image: nginx
     container_name:  servicio1
     ports: 
-      - "8080: 80"
+      - "8080:82"
+    networks:
+      - red1
+  python1:
+    build: 
+      context: C:\Users\APP DISTRIBUIDAS\Desktop\docker-compose\servidor
+      dockerfile: Dockerfile
+    container_name: servicio2
+    ports:
+    #puerto host puerto contenedor
+      - "8081:5000"
+    networks:
+      - red1
+    volumes:
+      - ./datos:/app/data
+  python2:
+    build: 
+      context: C:\Users\APP DISTRIBUIDAS\Desktop\docker-compose\servidor2
+      dockerfile: Dockerfile
+    container_name: servicio3
+    ports:
+    #puerto host puerto contenedor
+      - "8082:5000"
+    networks:
+      - red1
+    volumes:
+      - ./datos:/app/data  
+
+networks:
+  red1:
+volumes:
+  datos:
+
+      
